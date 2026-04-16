@@ -11,6 +11,15 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Message is required' });
   }
 
+  // Check if API key is present
+  if (!process.env.OPENAI_API_KEY) {
+    console.error('OPENAI_API_KEY is not set in environment variables');
+    return res.status(500).json({ error: 'API key is missing from environment variables' });
+  }
+
+  console.log('API Key exists:', process.env.OPENAI_API_KEY ? 'YES' : 'NO');
+  console.log('API Key length:', process.env.OPENAI_API_KEY.length);
+
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -45,7 +54,8 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       console.error('OpenAI API error:', data);
-      return res.status(500).json({ error: 'Failed to get response from AI' });
+      console.error('Status:', response.status);
+      return res.status(500).json({ error: `Failed to get response from AI: ${data.error?.message || 'Unknown error'}` });
     }
 
     const aiMessage = data.choices[0].message.content;
@@ -54,6 +64,6 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Serverless function error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: `Internal server error: ${error.message}` });
   }
 }
