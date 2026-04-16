@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Manya!</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Opening Screen -->
+  <div id="openingScreen" class="opening-screen">
+    <div class="opening-content">
+      <h1 class="typewriter">Happy Birthday <span class="text-blue">Manya</span>!</h1>
+      <p>Make your wishes come true...</p>
+    </div>
+    
+    <div class="candles-container">
+      <div class="candle-wrapper" data-index="0">
+        <div class="candle">
+          <div class="candle-body"></div>
+        </div>
+        <div class="flame-container active">
+          <div class="flame"></div>
+        </div>
+      </div>
+      <div class="candle-wrapper" data-index="1">
+        <div class="candle">
+          <div class="candle-body"></div>
+        </div>
+        <div class="flame-container active">
+          <div class="flame"></div>
+        </div>
+      </div>
+      <div class="candle-wrapper" data-index="2">
+        <div class="candle">
+          <div class="candle-body"></div>
+        </div>
+        <div class="flame-container active">
+          <div class="flame"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="opening-instruction">
+      <p id="candleText" class="pulse">Tap each candle to blow it out!</p>
+      <button id="startBtn" class="celebrate-btn hidden">
+        Let's Celebrate!
+      </button>
+    </div>
+    
+    <div class="opening-footer">
+      <svg class="lily-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 50C50 50 70 20 90 20C90 20 60 40 50 50Z" fill="#3674B5"/>
+        <path d="M50 50C50 50 30 20 10 20C10 20 40 40 50 50Z" fill="#3674B5"/>
+        <path d="M50 50C50 50 80 70 80 90C80 90 60 60 50 50Z" fill="#3674B5"/>
+        <path d="M50 50C50 50 20 70 20 90C20 90 40 60 50 50Z" fill="#3674B5"/>
+        <path d="M50 50C50 50 80 50 95 50C95 50 65 55 50 50Z" fill="#3674B5"/>
+        <path d="M50 50C50 50 20 50 5 50C5 50 35 45 50 50Z" fill="#3674B5"/>
+        <circle cx="50" cy="50" r="8" fill="#FFF"/>
+        <circle cx="50" cy="50" r="4" fill="#FFD700"/>
+      </svg>
+      <p>iOS 26 Digital Celebration</p>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="mainApp" class="main-app hidden">
+    
+    <!-- Background Decor -->
+    <div class="bg-decor">
+      <div class="floating-lily lily-1">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 50C50 50 70 20 90 20C90 20 60 40 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 30 20 10 20C10 20 40 40 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 80 70 80 90C80 90 60 60 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 20 70 20 90C20 90 40 60 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 80 50 95 50C95 50 65 55 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 20 50 5 50C5 50 35 45 50 50Z" fill="#3674B5"/>
+          <circle cx="50" cy="50" r="8" fill="#FFF"/>
+          <circle cx="50" cy="50" r="4" fill="#FFD700"/>
+        </svg>
+      </div>
+      <div class="floating-lily lily-2">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 50C50 50 70 20 90 20C90 20 60 40 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 30 20 10 20C10 20 40 40 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 80 70 80 90C80 90 60 60 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 20 70 20 90C20 90 40 60 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 80 50 95 50C95 50 65 55 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 20 50 5 50C5 50 35 45 50 50Z" fill="#3674B5"/>
+          <circle cx="50" cy="50" r="8" fill="#FFF"/>
+          <circle cx="50" cy="50" r="4" fill="#FFD700"/>
+        </svg>
+      </div>
+      <div class="floating-lily lily-3">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 50C50 50 70 20 90 20C90 20 60 40 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 30 20 10 20C10 20 40 40 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 80 70 80 90C80 90 60 60 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 20 70 20 90C20 90 40 60 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 80 50 95 50C95 50 65 55 50 50Z" fill="#3674B5"/>
+          <path d="M50 50C50 50 20 50 5 50C5 50 35 45 50 50Z" fill="#3674B5"/>
+          <circle cx="50" cy="50" r="8" fill="#FFF"/>
+          <circle cx="50" cy="50" r="4" fill="#FFD700"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <section class="header-section scroll-animate">
+      <div class="badge">
+        <div class="badge-inner">Digital Bouquet</div>
+      </div>
+      <h1>Happy Birthday <br/><span class="text-blue">MANYA!</span></h1>
+      <p class="date">26 April • 2026</p>
+    </section>
+
+    <!-- Countdown -->
+    <section class="countdown-section scroll-animate">
+      <div class="countdown-item">
+        <div class="countdown-value" id="countdownDays">0</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-value" id="countdownHours">0</div>
+        <div class="countdown-label">Hrs</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-value" id="countdownMins">0</div>
+        <div class="countdown-label">Mins</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-value" id="countdownSecs">0</div>
+        <div class="countdown-label">Secs</div>
+      </div>
+    </section>
+
+    <!-- Personal Message -->
+    <section class="personal-message scroll-animate">
+      <div class="glass-card scroll-animate-scale">
+        <div class="card-header">
+          <div class="heart-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <span class="for-you">For You</span>
+        </div>
+        
+        <h2 class="typewriter-multiline">To the most amazing <span class="text-blue">MANYA</span> in the universe!</h2>
+        
+        <div class="message-content">
+          <p>Happy Birthday! Your beautiful voice, gaming skills, love for cats, and dedication to NEET studies make you truly special. May your day be filled with everything you love.</p>
+          <p>You deserve a year as amazing as you are - keep singing, gaming, acing those exams, and being the wonderful person you are!</p>
+        </div>
+
+        <div class="sender-info">
+          <img src="https://i.ibb.co/nFQQCV5/tutangamingxd-avatar-SHORTCODE-20260410-151328-624715264.jpg" alt="Sender" class="sender-avatar">
+          <div class="sender-text">
+            <p class="with-love">with all my love,</p>
+            <p class="sender-name">your bestfriend</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Games Section -->
+    <section class="games-section scroll-animate">
+      <div class="section-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6 text-blue">
+          <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        </svg>
+        <h2>Quiz</h2>
+      </div>
+      
+      <div class="glass-card quiz-card">
+        <div id="quizStartScreen" class="quiz-screen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="quiz-icon">
+            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+          <h3>Answer The Questions</h3>
+          <p>and prove you're my best friend.</p>
+          <button id="startQuizBtn" class="celebrate-style-btn">
+            GO!
+          </button>
+        </div>
+
+        <div id="quizQuestionScreen" class="quiz-screen hidden">
+          <button id="quizBackBtn" class="outline-btn back-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          
+          <div class="question-header">
+            <p class="question-counter">Question <span id="currentQ">1</span> of <span id="totalQ">10</span></p>
+          </div>
+          
+          <h3 id="questionText" class="question-text">Question goes here</h3>
+          
+          <textarea id="answerInput" class="answer-input" placeholder="Type your answer here..."></textarea>
+          
+          <button id="nextQBtn" class="outline-btn">
+            Next Question
+          </button>
+        </div>
+
+        <div id="quizResultScreen" class="quiz-screen hidden">
+          <h3>Quiz Complete!</h3>
+          <p>You've finished <span class="text-blue">Manya</span>'s game!</p>
+          <button id="copyAnswersBtn" class="celebrate-style-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+            </svg>
+            Copy Answers
+          </button>
+          <button id="sendToTutanBtn" class="celebrate-style-btn" style="margin-top: 10px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+              <path d="M23 7l-7 5 7 5M5 12l-3-9 3 9M7 20l-3 3 3-3"/>
+            </svg>
+            Send to Tutan
+          </button>
+          <p class="note">Note: Copy and send this to Tutan.</p>
+          <button id="goBackBtn" class="celebrate-style-btn">Go Back</button>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- Tutan Wishes -->
+    <section class="wishes-section scroll-animate">
+      <div class="section-header">
+        <h2>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6 text-blue">
+            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+          </svg>
+          From Tutan
+        </h2>
+        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-blue-light pulse">
+          <path d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z"/>
+        </svg>
+      </div>
+      
+      <div class="wishes-carousel" id="wishesCarousel">
+        <div class="wish-card scroll-animate-scale">
+          <p>"To the amazing singer and gamer, Happy Birthday <span class="text-blue">Manya</span>! May your voice always hit the right notes and your Valorant skills stay sharp!"</p>
+          <div class="wish-signature">
+            <div class="signature-line"></div>
+            <span>Always, Tutan</span>
+          </div>
+        </div>
+        <div class="wish-card scroll-animate-scale">
+          <p>"<span class="text-blue">Manya</span>, you're a true gem! From your beautiful singing to your love for cats, you make everything better. Have the most wonderful birthday!"</p>
+          <div class="wish-signature">
+            <div class="signature-line"></div>
+            <span>Always, Tutan</span>
+          </div>
+        </div>
+        <div class="wish-card scroll-animate-scale">
+          <p>"Wishing you a year filled with high scores in Valorant, purr-fect moments with cats, and amazing success in your NEET journey!"</p>
+          <div class="wish-signature">
+            <div class="signature-line"></div>
+            <span>Always, Tutan</span>
+          </div>
+        </div>
+        <div class="wish-card scroll-animate-scale">
+          <p>"Happy Birthday! You deserve the world and more. Keep acing those exams, hitting those high notes, and being the gaming queen you are!"</p>
+          <div class="wish-signature">
+            <div class="signature-line"></div>
+            <span>Always, Tutan</span>
+          </div>
+        </div>
+        <div class="wish-card scroll-animate-scale">
+          <p>"Cheers to another year of being iconic. You make life look easy and beautiful, <span class="text-blue">Manya</span>! From NEET prep to gaming, you crush everything!"</p>
+          <div class="wish-signature">
+            <div class="signature-line"></div>
+            <span>Always, Tutan</span>
+          </div>
+        </div>
+        <div class="wish-card scroll-animate-scale">
+          <p>"May your birthday be just the beginning of a year full of happy memories, big dreams, and maybe some Valorant duels together!"</p>
+          <div class="wish-signature">
+            <div class="signature-line"></div>
+            <span>Always, Tutan</span>
+          </div>
+        </div>
+      </div>
+      
+      <p class="swipe-hint">Swipe for more wishes</p>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section scroll-animate">
+      <h2 class="typewriter-multiline">Why <span class="text-blue">Manya</span> is Awesome</h2>
+      <div class="timeline">
+        <div class="timeline-line"></div>
+        
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>
+            </svg>
+          </div>
+          <div class="timeline-card scroll-animate-left">
+            <h4>Her voice is heavenly 🎤</h4>
+            <p>The way she sings touches hearts and creates magic with every note.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <div class="timeline-card scroll-animate-left">
+            <h4>She's a gaming queen 🎮</h4>
+            <p>Her Valorant skills and strategic mind make her unstoppable in the virtual world.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <div class="timeline-card scroll-animate-left">
+            <h4>She loves cats unconditionally 🐱</h4>
+            <p>Her gentle nature with furry friends shows her pure and caring heart.</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <div class="timeline-card scroll-animate-left">
+            <h4>She's determined and brilliant 📚</h4>
+            <p>Her dedication to NEET preparation shows her strength and commitment to dreams.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Thank You Section -->
+    <section class="thank-you-section scroll-animate">
+      <h2 class="typewriter-multiline">Thank you for everything.</h2>
+      <p><span class="text-blue">Manya</span>, there aren't enough words to express my gratitude for your presence in my life. Whether you're singing your heart out, dominating in Valorant, cuddling with cats, or crushing your NEET preparation, you inspire everyone around you. Thank you for being you - talented, dedicated, and absolutely amazing. You truly are the best!</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <img src="https://i.ibb.co/nFQQCV5/tutangamingxd-avatar-SHORTCODE-20260410-151328-624715264.jpg" alt="Creator" class="creator-avatar">
+      <p class="made-with">Made with love for <span class="text-blue">Manya</span></p>
+      <p class="creator">by Tutan</p>
+    </footer>
+  </div>
+
+  
+  <!-- iOS-style Notifications -->
+  <div id="notificationContainer" class="notification-container"></div>
+
+  <!-- Ripple container -->
+  <div id="rippleContainer"></div>
+
+  <!-- Floating Chat Button -->
+  <button id="chatBtn" class="chat-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6">
+      <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+    </svg>
+  </button>
+
+  <!-- Mini Chat Interface -->
+  <div id="miniChat" class="mini-chat hidden">
+    <div class="mini-chat-header">
+      <div class="mini-chat-avatar">
+        <img src="https://i.ibb.co/nFQQCV5/tutangamingxd-avatar-SHORTCODE-20260410-151328-624715264.jpg" alt="Tutan">
+      </div>
+      <div class="online-dot"></div>
+      <div class="mini-chat-info">
+        <span class="mini-chat-name">Tutan</span>
+        <span class="mini-chat-status">Online</span>
+      </div>
+      <button id="closeChatBtn" class="mini-chat-close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mini-chat-messages" id="chatMessages">
+      <div class="message-wrapper received">
+        <div class="message-content-row">
+          <div class="message received">
+            <span class="message-content-text">Hey Manya! 🎂</span>
+            <div class="quick-reactions hidden">
+              <span class="reaction-emoji">🤍</span>
+              <span class="reaction-emoji">🦢</span>
+              <span class="reaction-emoji">☁️</span>
+              <span class="reaction-emoji">🕊️</span>
+              <span class="reaction-emoji">👀</span>
+              <button class="add-reaction-btn">+</button>
+            </div>
+            <div class="reaction-pill hidden">
+              <span class="reaction-pill-emoji">🤍</span>
+              <span class="reaction-pill-count">1</span>
+            </div>
+          </div>
+          <div class="message-actions">
+            <button class="action-btn reaction-btn" title="React">☺︎</button>
+            <button class="action-btn reply-btn" title="Reply">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                <path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+              </svg>
+            </button>
+            <button class="action-btn more-btn" title="More">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                <circle cx="12" cy="5" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="12" cy="19" r="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="swipe-reply-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="reply-preview hidden" id="replyPreview">
+      <div class="reply-preview-content">
+        <span class="reply-label">Replying to Tutan</span>
+        <span class="reply-text"></span>
+      </div>
+      <button class="cancel-reply-btn" id="cancelReplyBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="edit-preview hidden" id="editPreview">
+      <div class="edit-preview-content">
+        <span class="edit-label">Editing message</span>
+        <span class="edit-text"></span>
+      </div>
+      <button class="cancel-edit-btn" id="cancelEditBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mini-chat-input">
+      <input type="text" id="chatInput" placeholder="Message..." class="chat-input-field">
+      <button id="sendChatBtn" class="send-chat-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- More Menu Dropdown for Received Messages -->
+  <div id="moreMenuReceived" class="more-menu hidden">
+    <button class="more-menu-item more-reply-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+        <path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+      </svg>
+      <span>Reply</span>
+    </button>
+    <button class="more-menu-item more-copy-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+      </svg>
+      <span>Copy</span>
+    </button>
+  </div>
+
+  <!-- More Menu Dropdown for Sent Messages -->
+  <div id="moreMenuSent" class="more-menu hidden">
+    <button class="more-menu-item more-edit-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+      </svg>
+      <span>Edit</span>
+    </button>
+    <button class="more-menu-item more-copy-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+      </svg>
+      <span>Copy</span>
+    </button>
+    <button class="more-menu-item more-unsend-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+        <path d="M21 4l-9 9m0 0l-9 9m9-9l9-9m-9 9l-9 9"/>
+      </svg>
+      <span>Unsend</span>
+    </button>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
