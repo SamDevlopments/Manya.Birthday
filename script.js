@@ -438,86 +438,8 @@ document.addEventListener('DOMContentLoaded', () => {
     miniChat.classList.add('hidden');
   });
   
-  // Groq API configuration
-  const GROQ_API_KEY = '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';
-  const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-  
-  // Conversation history for context
-  let conversationHistory = [
-    {
-      role: 'system',
-      content: 'You are a friendly, conversational AI assistant. Keep responses brief, natural, and engaging. Use emojis occasionally to make the conversation more lively. You are talking to Manya on her birthday.'
-    }
-  ];
-
-  // Function to call Groq API
-  async function getGroqResponse(userMessage) {
-    try {
-      console.log('Calling Groq API...');
-      console.log('API Key present:', GROQ_API_KEY ? 'Yes' : 'No');
-      console.log('API URL:', GROQ_API_URL);
-      
-      // Add user message to conversation history
-      conversationHistory.push({
-        role: 'user',
-        content: userMessage
-      });
-
-      const requestBody = {
-        model: 'llama3-70b-8192',
-        messages: conversationHistory,
-        temperature: 0.7,
-        max_tokens: 500,
-        stream: false
-      };
-
-      console.log('Request body:', JSON.stringify(requestBody, null, 2));
-
-      const response = await fetch(GROQ_API_URL, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${GROQ_API_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestBody)
-      });
-
-      console.log('Response status:', response.status);
-      console.log('Response ok:', response.ok);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('API Error Response:', errorText);
-        throw new Error(`API error: ${response.status} - ${errorText}`);
-      }
-
-      const data = await response.json();
-      console.log('API Response data:', data);
-      
-      const aiResponse = data.choices[0].message.content;
-      console.log('AI Response:', aiResponse);
-
-      // Add AI response to conversation history
-      conversationHistory.push({
-        role: 'assistant',
-        content: aiResponse
-      });
-
-      // Keep conversation history manageable (last 10 messages)
-      if (conversationHistory.length > 11) {
-        conversationHistory = [conversationHistory[0], ...conversationHistory.slice(-10)];
-      }
-
-      return aiResponse;
-    } catch (error) {
-      console.error('Groq API error:', error);
-      console.error('Error details:', error.message);
-      return "Sorry, I'm having trouble connecting right now. Please try again! 😊";
-    }
-  }
-
   // Send message
-  function sendMessage() {
+  async function sendMessage() {
     const message = chatInput.value.trim();
     if (message) {
       // Handle editing existing message
@@ -653,48 +575,108 @@ document.addEventListener('DOMContentLoaded', () => {
       chatInput.value = '';
       chatMessages.scrollTop = chatMessages.scrollHeight;
       
-      // Get AI response from Groq
-      getGroqResponse(message).then(aiResponse => {
-        const receivedMessageWrapper = document.createElement('div');
-        receivedMessageWrapper.className = 'message-wrapper received';
-        receivedMessageWrapper.innerHTML = `
-          <div class="message-content-row">
-            <div class="message received">
-              <span class="message-content-text">${aiResponse}</span>
-              <div class="quick-reactions hidden">
-                <span class="reaction-emoji">🤍</span>
-                <span class="reaction-emoji">🦢</span>
-                <span class="reaction-emoji">☁️</span>
-                <span class="reaction-emoji">🕊️</span>
-                <span class="reaction-emoji">👀</span>
-                <button class="add-reaction-btn">+</button>
+      // Show typing indicator
+      const typingIndicator = document.createElement('div');
+      typingIndicator.className = 'message-wrapper received typing';
+      typingIndicator.innerHTML = `
+        <div class="message-content-row">
+          <div class="message received">
+            <div class="typing-indicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      `;
+      chatMessages.appendChild(typingIndicator);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      
+      // Fetch response from OpenAI API
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: message })
+        });
+        
+        const data = await response.json();
+        
+        // Remove typing indicator
+        typingIndicator.remove();
+        
+        if (data.error) {
+          console.error('API Error:', data.error);
+          const errorMessage = document.createElement('div');
+          errorMessage.className = 'message-wrapper received';
+          errorMessage.innerHTML = `
+            <div class="message-content-row">
+              <div class="message received">
+                <span class="message-content-text">Sorry, I'm having trouble connecting. Please try again! 🤍</span>
               </div>
             </div>
-            <div class="message-actions">
-              <button class="action-btn reaction-btn" title="React">☺︎</button>
-              <button class="action-btn reply-btn" title="Reply">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
-                  <path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
-                </svg>
-              </button>
-              <button class="action-btn more-btn" title="More">
-                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                  <circle cx="12" cy="5" r="2"/>
-                  <circle cx="12" cy="12" r="2"/>
-                  <circle cx="12" cy="19" r="2"/>
-                </svg>
-              </button>
+          `;
+          chatMessages.appendChild(errorMessage);
+        } else {
+          const receivedMessageWrapper = document.createElement('div');
+          receivedMessageWrapper.className = 'message-wrapper received';
+          receivedMessageWrapper.innerHTML = `
+            <div class="message-content-row">
+              <div class="message received">
+                <span class="message-content-text">${data.message}</span>
+                <div class="quick-reactions hidden">
+                  <span class="reaction-emoji">🤍</span>
+                  <span class="reaction-emoji">🦢</span>
+                  <span class="reaction-emoji">☁️</span>
+                  <span class="reaction-emoji">🕊️</span>
+                  <span class="reaction-emoji">👀</span>
+                  <button class="add-reaction-btn">+</button>
+                </div>
+              </div>
+              <div class="message-actions">
+                <button class="action-btn reaction-btn" title="React">☺︎</button>
+                <button class="action-btn reply-btn" title="Reply">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                    <path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+                  </svg>
+                </button>
+                <button class="action-btn more-btn" title="More">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                    <circle cx="12" cy="5" r="2"/>
+                    <circle cx="12" cy="12" r="2"/>
+                    <circle cx="12" cy="19" r="2"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="swipe-reply-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+              </svg>
+            </div>
+          `;
+          chatMessages.appendChild(receivedMessageWrapper);
+        }
+        
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      } catch (error) {
+        console.error('Fetch error:', error);
+        typingIndicator.remove();
+        
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'message-wrapper received';
+        errorMessage.innerHTML = `
+          <div class="message-content-row">
+            <div class="message received">
+              <span class="message-content-text">Sorry, I'm having trouble connecting. Please try again! 🤍</span>
             </div>
           </div>
-          <div class="swipe-reply-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
-            </svg>
-          </div>
         `;
-        chatMessages.appendChild(receivedMessageWrapper);
+        chatMessages.appendChild(errorMessage);
         chatMessages.scrollTop = chatMessages.scrollHeight;
-      });
+      }
     }
   }
   
