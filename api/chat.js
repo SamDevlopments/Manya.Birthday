@@ -1,4 +1,4 @@
-// Vercel Serverless Function for OpenAI Chat
+// Vercel Serverless Function for OpenAI Chat - Zero Dependency
 export default async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== 'POST') {
@@ -14,31 +14,22 @@ export default async function handler(req, res) {
   // Check if API key is present
   if (!process.env.OPENAI_API_KEY) {
     console.error('OPENAI_API_KEY is not set in environment variables');
-    return res.status(500).json({ error: 'API key is missing from environment variables' });
+    return res.status(500).json({ error: 'API key is missing from environment variables. Please add OPENAI_API_KEY to Vercel environment variables.' });
   }
-
-  console.log('API Key exists:', process.env.OPENAI_API_KEY ? 'YES' : 'NO');
-  console.log('API Key length:', process.env.OPENAI_API_KEY.length);
 
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+        'Authorization': 'Bearer ' + process.env.OPENAI_API_KEY,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         model: 'gpt-4o-mini',
         messages: [
           {
             role: 'system',
-            content: `You are Manya's Assistant, a sweet and friendly AI for a birthday celebration site. 
-            - Your name is "Manya's Assistant"
-            - Use emojis like 🤍, ✨, 🎂, 🎉 in your responses
-            - Keep responses short and chat-like (Instagram style, 1-3 sentences max)
-            - Be enthusiastic about Manya's birthday celebration
-            - Be helpful and warm
-            - You're here to help celebrate Manya's special day!`
+            content: 'You are Manya\'s sweet and helpful birthday assistant. Use emojis like 🤍✨🎂🎉 and be celebratory! Keep responses short and chat-like (Instagram style, 1-3 sentences max).'
           },
           {
             role: 'user',
@@ -54,8 +45,15 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       console.error('OpenAI API error:', data);
-      console.error('Status:', response.status);
-      return res.status(500).json({ error: `Failed to get response from AI: ${data.error?.message || 'Unknown error'}` });
+      const errorMessage = data.error?.message || 'Unknown error';
+      return res.status(response.status).json({ 
+        error: `OpenAI API error: ${errorMessage}`,
+        details: data 
+      });
+    }
+
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      return res.status(500).json({ error: 'Invalid response format from OpenAI' });
     }
 
     const aiMessage = data.choices[0].message.content;
@@ -64,6 +62,9 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Serverless function error:', error);
-    return res.status(500).json({ error: `Internal server error: ${error.message}` });
+    return res.status(500).json({ 
+      error: 'Internal server error',
+      message: error.message 
+    });
   }
 }
