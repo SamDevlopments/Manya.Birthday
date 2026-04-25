@@ -2218,19 +2218,19 @@ function getLocalResponse(userMessage) {
       "Aww, you poor thing! Go get some sleep and feel better soon 🤍",
       "Tired days happen. Make sure to take care of yourself! 🤍"
     ],
-    'neet': [
-      "NEET is tough but you've got this! Keep pushing, you're doing amazing! 🤍",
-      "Medical seats are waiting for you! Your hard work will pay off! 🤍",
-      "I believe in you! NEET preparation is hard but you're stronger! 🤍",
-      "Stay focused! You're going to crush it! What subject are you studying? 🤍"
+    'design': [
+      "Designing is amazing! Your creativity is going to take you far! Keep pushing, you're doing amazing! 🤍",
+      "Your artistic skills are incredible! Your hard work will pay off! 🤍",
+      "I believe in you! Designing is creative work but you're so talented! 🤍",
+      "Stay focused! You're going to create beautiful things! What are you designing today? 🤍"
     ],
-    // Hinglish study
-    'padhai': [
-      "Padhai mein lag jaao! Sab theek ho jayega! 🤍",
-      "Medical seat tumhara hai! Mehnat ka phal milega! 🤍",
-      "Main viswas karti hoon! NEET mushkil hai par tum strong ho! 🤍",
-      "Focus rakhna! Tum kar doge! Kya padh rahe ho? 🤍",
-      "Padhai bahut zaroori hai! Tum kar sakte ho! 🤍",
+    // Hinglish art/design
+    'art': [
+      "Art mein lag jaao! Sab theek ho jayega! 🤍",
+      "Tumhara talent hai! Mehnat ka phal milega! 🤍",
+      "Main viswas karti hoon! Art mushkil hai par tum talented ho! 🤍",
+      "Focus rakhna! Tum kar doge! Kya bana rahe ho? 🤍",
+      "Art bahut zaroori hai! Tum kar sakte ho! 🤍",
       "Mehnat ka phal zaroor milega! Bas rukna mat! 🤍",
       "Tumhara sapna sach hoga! Himmat rakhna! 🤍"
     ],
@@ -2284,17 +2284,41 @@ function getLocalResponse(userMessage) {
       "Kaam se hi kuch milta hai! 🤍",
       "Kaam karne se satisfaction milti hai! 🤍"
     ],
-    'valorant': [
-      "Valorant is so fun! Who's your main agent? 🎮",
-      "I love Valorant too! What rank are you? 🎮",
-      "Let's play sometime! What's your favorite map? 🎮",
-      "Valorant is amazing! Are you more of a duelist or support player? 🎮"
+    'art': [
+      "Art is so beautiful! What's your favorite medium - painting, drawing, or digital art? 🎨",
+      "I love art too! What inspires your creativity? 🎨",
+      "Let's create something! What's your favorite thing to draw? 🎨",
+      "Art is amazing! Are you more into traditional or digital art? 🎨"
     ],
     'music': [
       "Music is life! What songs have you been listening to lately? 🎵",
       "I love music too! What's your favorite genre? 🎵",
       "Music makes everything better! Any recommendations? 🎵",
       "Tell me about your favorite songs! I'd love to hear 🎵"
+    ],
+    'pets': [
+      "Pets are the best! Do you have any cats, parrots, or rabbits? 🐱",
+      "I love animals too! What's your favorite pet? 🐰",
+      "Pets bring so much joy! What animals do you love the most? 🦜",
+      "From cats to rabbits - all pets are amazing! Which one is your favorite? 🐱"
+    ],
+    'cats': [
+      "Cats are so adorable! Do you have any cats? 🐱",
+      "I love cats too! They're so independent and cute! 😺",
+      "Cats make the best companions! What do you love most about them? 🐱",
+      "Meow! Cats are amazing! Tell me about your favorite cat! 🐱"
+    ],
+    'horror': [
+      "Horror movies are thrilling even when scary! What's your favorite? 🎬",
+      "I know you get scared but still love horror! That's so brave! 👻",
+      "Horror movies are the best! What's the scariest one you've seen? 🎃",
+      "Even though you get scared, you still watch them! That's dedication! 🎬"
+    ],
+    'dark': [
+      "Dark colors are so aesthetic! Black and navy blue are beautiful! 🖤",
+      "I love dark colors too! They're so classy and mysterious! 🌑",
+      "Black and navy blue are amazing choices! What else do you like? 💙",
+      "Dark colors have such a vibe! Your taste is unique! 🖤"
     ],
     'food': [
       "Food is amazing! What's your absolute favorite dish? 🍕",
@@ -3989,17 +4013,18 @@ function fireConfetti(options = {}) {
   
   // Create canvas if doesn't exist
   let canvas = document.getElementById('confettiCanvas');
+  const mobileFrame = document.querySelector('.mobile-frame');
   if (!canvas) {
     canvas = document.createElement('canvas');
     canvas.id = 'confettiCanvas';
     canvas.className = 'confetti-canvas';
-    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;';
-    document.body.appendChild(canvas);
+    canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;';
+    mobileFrame.appendChild(canvas);
   }
   
   const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = mobileFrame.offsetWidth;
+  canvas.height = mobileFrame.offsetHeight;
   
   const particles = [];
   const particleCount = config.particleCount;
@@ -4112,10 +4137,22 @@ document.addEventListener('DOMContentLoaded', () => {
   startBtn.addEventListener('click', () => {
     openingScreen.classList.add('exiting');
     
+    // Play birthday audio
+    const audio = document.getElementById('birthdayAudio');
+    if (audio) {
+      audio.play().catch(e => console.log('Audio play failed:', e));
+    }
+    
     setTimeout(() => {
       openingScreen.style.display = 'none';
       mainApp.classList.remove('hidden');
       hasStarted = true;
+      
+      // Show mute button
+      const muteBtn = document.getElementById('muteBtn');
+      if (muteBtn) {
+        muteBtn.classList.remove('hidden');
+      }
       
       // Big celebration confetti
       fireConfetti({
@@ -4126,6 +4163,26 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, 1000);
   });
+
+  // Mute button functionality
+  const muteBtn = document.getElementById('muteBtn');
+  const soundOnIcon = document.getElementById('soundOnIcon');
+  const soundOffIcon = document.getElementById('soundOffIcon');
+  const audio = document.getElementById('birthdayAudio');
+  
+  if (muteBtn && audio) {
+    muteBtn.addEventListener('click', () => {
+      audio.muted = !audio.muted;
+      
+      if (audio.muted) {
+        soundOnIcon.classList.add('hidden');
+        soundOffIcon.classList.remove('hidden');
+      } else {
+        soundOnIcon.classList.remove('hidden');
+        soundOffIcon.classList.add('hidden');
+      }
+    });
+  }
   
 // ===== Countdown =====
   function updateCountdown() {
@@ -4488,29 +4545,117 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(showNEETNotification, 10000);
   
   // ===== Ripple Effect =====
-  document.body.addEventListener('click', (e) => {
+  const mobileFrame = document.querySelector('.mobile-frame');
+  mobileFrame.addEventListener('click', (e) => {
     const ripple = document.createElement('div');
     ripple.className = 'ripple';
     
+    const rect = mobileFrame.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
     const size = 50;
     ripple.style.cssText = `
-      position: fixed;
+      position: absolute;
       width: ${size}px;
       height: ${size}px;
       border-radius: 50%;
       background: rgba(37, 99, 235, 0.3);
-      left: ${e.clientX - size/2}px;
-      top: ${e.clientY - size/2}px;
+      left: ${x - size/2}px;
+      top: ${y - size/2}px;
       pointer-events: none;
       animation: rippleEffect 0.6s ease-out forwards;
     `;
     
-    document.body.appendChild(ripple);
+    mobileFrame.appendChild(ripple);
     
     setTimeout(() => {
       ripple.remove();
     }, 600);
   });
+  
+  // ===== Auto-hide scrollbar when not scrolling =====
+  const mobileContent = document.querySelector('.mobile-content');
+  let scrollTimeout;
+  
+  if (mobileContent) {
+    mobileContent.addEventListener('scroll', () => {
+      mobileContent.style.setProperty('--scrollbar-opacity', '1');
+      
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        mobileContent.style.setProperty('--scrollbar-opacity', '0');
+      }, 1500);
+    });
+    
+    // ===== Drag-to-scroll functionality =====
+    let isDown = false;
+    let startX, startY;
+    let scrollLeft, scrollTop;
+    
+    mobileContent.addEventListener('mousedown', (e) => {
+      isDown = true;
+      mobileContent.style.cursor = 'grabbing';
+      startX = e.pageX - mobileContent.offsetLeft;
+      startY = e.pageY - mobileContent.offsetTop;
+      scrollLeft = mobileContent.scrollLeft;
+      scrollTop = mobileContent.scrollTop;
+    });
+    
+    mobileContent.addEventListener('mouseleave', () => {
+      isDown = false;
+      mobileContent.style.cursor = 'grab';
+    });
+    
+    mobileContent.addEventListener('mouseup', () => {
+      isDown = false;
+      mobileContent.style.cursor = 'grab';
+    });
+    
+    mobileContent.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - mobileContent.offsetLeft;
+      const y = e.pageY - mobileContent.offsetTop;
+      const walkX = (x - startX) * 2; // Scroll speed multiplier
+      const walkY = (y - startY) * 2;
+      mobileContent.scrollLeft = scrollLeft - walkX;
+      mobileContent.scrollTop = scrollTop - walkY;
+    });
+  }
+  
+  // ===== Drag-to-scroll for wishes carousel =====
+  const wishesCarousel = document.getElementById('wishesCarousel');
+  if (wishesCarousel) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    wishesCarousel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      wishesCarousel.style.cursor = 'grabbing';
+      startX = e.pageX - wishesCarousel.offsetLeft;
+      scrollLeft = wishesCarousel.scrollLeft;
+    });
+    
+    wishesCarousel.addEventListener('mouseleave', () => {
+      isDown = false;
+      wishesCarousel.style.cursor = 'grab';
+    });
+    
+    wishesCarousel.addEventListener('mouseup', () => {
+      isDown = false;
+      wishesCarousel.style.cursor = 'grab';
+    });
+    
+    wishesCarousel.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - wishesCarousel.offsetLeft;
+      const walkX = (x - startX) * 2;
+      wishesCarousel.scrollLeft = scrollLeft - walkX;
+    });
+  }
   
   // ===== Double Tap Confetti (Easter Egg) =====
   let lastTap = 0;

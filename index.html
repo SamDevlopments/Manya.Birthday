@@ -7,8 +7,21 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Opening Screen -->
-  <div id="openingScreen" class="opening-screen">
+  <audio id="birthdayAudio" preload="auto" loop>
+    <source src="audio.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Mobile Frame Container -->
+  <div class="mobile-frame">
+    <!-- iPhone Side Buttons -->
+    <div class="silent-switch"></div>
+    <div class="side-button-left"></div>
+    <div class="side-button-right"></div>
+    
+    <!-- Scrollable Content Area -->
+    <div class="mobile-content">
+    <!-- Opening Screen -->
+    <div id="openingScreen" class="opening-screen">
     <div class="opening-content">
       <h1 class="typewriter">Happy Birthday <span class="text-blue">Manya</span>!</h1>
       <p>Make your wishes come true...</p>
@@ -59,7 +72,6 @@
         <circle cx="50" cy="50" r="8" fill="#FFF"/>
         <circle cx="50" cy="50" r="4" fill="#FFD700"/>
       </svg>
-      <p>iOS 26 Digital Celebration</p>
     </div>
   </div>
 
@@ -359,21 +371,34 @@
       <p class="made-with">Made with love for <span class="text-blue">Manya</span></p>
       <p class="creator">by Tutan</p>
     </footer>
-  </div>
+    </div>
 
-  
-  <!-- iOS-style Notifications -->
-  <div id="notificationContainer" class="notification-container"></div>
+    <!-- iOS-style Notifications -->
+    <div id="notificationContainer" class="notification-container"></div>
 
-  <!-- Ripple container -->
-  <div id="rippleContainer"></div>
+    <!-- Ripple container -->
+    <div id="rippleContainer"></div>
 
-  <!-- Floating Chat Button -->
+    <!-- Floating Chat Button -->
   <button id="chatBtn" class="chat-btn">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6">
       <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
     </svg>
   </button>
+
+  <!-- Mute Button -->
+  <button id="muteBtn" class="mute-btn hidden">
+    <svg id="soundOnIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+    </svg>
+    <svg id="soundOffIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 hidden">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <line x1="23" y1="9" x2="17" y2="15"/>
+      <line x1="17" y1="9" x2="23" y2="15"/>
+    </svg>
+  </button>
+  </div>
 
   <!-- Mini Chat Interface -->
   <div id="miniChat" class="mini-chat hidden">
@@ -569,6 +594,7 @@
       </svg>
       <span>Unsend</span>
     </button>
+  </div>
   </div>
   
   <script src="script.js"></script>
