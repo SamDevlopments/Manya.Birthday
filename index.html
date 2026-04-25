@@ -378,6 +378,11 @@
   <!-- Mini Chat Interface -->
   <div id="miniChat" class="mini-chat hidden">
     <div class="mini-chat-header">
+      <button id="backChatBtn" class="mini-chat-back hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
       <div class="mini-chat-avatar">
         <img src="https://i.ibb.co/nFQQCV5/tutangamingxd-avatar-SHORTCODE-20260410-151328-624715264.jpg" alt="Tutan">
       </div>
@@ -386,6 +391,11 @@
         <span class="mini-chat-name">Tutan</span>
         <span class="mini-chat-status">Online</span>
       </div>
+      <button id="fullscreenChatBtn" class="mini-chat-fullscreen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+        </svg>
+      </button>
       <button id="closeChatBtn" class="mini-chat-close">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
           <path d="M18 6L6 18M6 6l12 12"/>
@@ -456,13 +466,68 @@
       </button>
     </div>
     <div class="mini-chat-input">
+      <button id="emojiBtn" class="emoji-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+          <line x1="9" y1="9" x2="9.01" y2="9"/>
+          <line x1="15" y1="9" x2="15.01" y2="9"/>
+        </svg>
+      </button>
       <input type="text" id="chatInput" placeholder="Message..." class="chat-input-field">
+      <button id="plusBtn" class="plus-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+      </button>
       <button id="sendChatBtn" class="send-chat-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
           <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
         </svg>
       </button>
     </div>
+  </div>
+
+  <!-- Plus Menu Dropdown -->
+  <div id="plusMenu" class="plus-menu hidden">
+    <button class="plus-menu-item record-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+        <circle cx="12" cy="12" r="10"/>
+        <circle cx="12" cy="12" r="4" fill="currentColor"/>
+      </svg>
+      <span>Record</span>
+    </button>
+    <button class="plus-menu-item photo-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+      </svg>
+      <span>Photo</span>
+    </button>
+    <button class="plus-menu-item sticker-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+        <line x1="9" y1="9" x2="9.01" y2="9"/>
+        <line x1="15" y1="9" x2="15.01" y2="9"/>
+      </svg>
+      <span>Sticker</span>
+    </button>
+  </div>
+
+  <!-- Hidden file input for photo upload -->
+  <input type="file" id="photoInput" accept="image/*" class="hidden">
+
+  <!-- Instagram-style Image Viewer -->
+  <div id="imageViewer" class="image-viewer hidden">
+    <div class="image-viewer-backdrop" id="imageViewerBackdrop"></div>
+    <button class="image-viewer-close" id="imageViewerClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+    <img src="" alt="Full size image" class="image-viewer-img" id="imageViewerImg">
   </div>
 
   <!-- More Menu Dropdown for Received Messages -->
